@@ -16,9 +16,9 @@ void insertion_sort_list(listint_t **list)
 		next = current->next;
 		sorted_insertNode(&sorted, current);
 		current = next;
+		print_list(sorted);
 	}
 	*list = sorted;
-	/**print_list(*list);**/
 }
 
 
@@ -27,15 +27,15 @@ void sorted_insertNode(listint_t **sorted, listint_t *current)
 {
 	listint_t *tmp = *sorted;
 
-	if (*sorted == NULL || ((*sorted)->n) >= (current->n))
+	if (*sorted == NULL || (tmp->n) >= (current->n))
 	{
-		current->next = *sorted;
-		current->prev = NULL;
-		if (*sorted != NULL)
+		current->next = tmp;
+		if (tmp != NULL)
 		{
-			(*sorted)->prev = current;
+			tmp->prev = current;
 		}
-		*sorted = current;
+		current->prev = NULL;
+		(*sorted) = current;
 		return;
 	}
 
@@ -51,6 +51,4 @@ void sorted_insertNode(listint_t **sorted, listint_t *current)
 	}
 	tmp->next = current;
 	current->prev = tmp;
-
-	print_list(*sorted);
 }
